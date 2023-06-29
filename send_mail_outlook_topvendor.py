@@ -8,43 +8,22 @@ import time
 
 def goal(vendor,reworkgoal=0,cpmgoal=0,rework=0,cpm=0):
     if vendor == 'Both':
-        if rework > reworkgoal and cpm > cpmgoal:
-            content = f'''
-            <span>US rework rate is {rework:.2%}, goal is {reworkgoal:.2%},</span><span id="goal2"> don't meet</span><span> the goal.</span><br>
-            <span>US CPM is {cpm:.2f}, goal is {cpmgoal:.2f},</span><span id="goal2"> don't meet</span><span> the goal.</span><br>
-            <br>'''
-        elif rework <= reworkgoal and cpm > cpmgoal:
-            content = f'''
-            <span>US rework rate is {rework:.2%}, goal is {reworkgoal:.2%},</span><span id="goal1"> meet</span><span> the goal.</span><br>
-            <span>US CPM is {cpm:.2f}, goal is {cpmgoal:.2f},</span><span id="goal2"> don't meet</span><span> the goal.</span><br>
-            <br>'''
-        elif rework > reworkgoal and cpm <= cpmgoal:
-            content = f'''
-            <span>US rework rate is {rework:.2%}, goal is {reworkgoal:.2%},</span><span id="goal2"> don't meet</span><span> the goal.</span><br>
-            <span>US CPM is {cpm:.2f}, goal is {cpmgoal:.2f},</span><span id="goal1"> meet</span><span> the goal.</span><br>
-            <br>'''
-        else:
-            content = f'''
-            <span>US rework rate is {rework:.2%}, goal is {reworkgoal:.2%},</span><span id="goal1"> meet</span><span> the goal.</span><br>
-            <span>US CPM is {cpm:.2f}, goal is {cpmgoal:.2f},</span><span id="goal1"> meet</span><span> the goal.</span><br>
+        # 使用三元运算符来简化条件判断
+        rework_result = "meet" if rework <= reworkgoal else "don't meet"
+        cpm_result = "meet" if cpm <= cpmgoal else "don't meet"
+        content = f'''
+            <span>US rework rate is {rework:.2%}, goal is {reworkgoal:.2%},</span><span id="goal1"> {rework_result}</span><span> the goal.</span><br>
+            <span>US CPM is {cpm:.2f}, goal is {cpmgoal:.2f},</span><span id="goal1"> {cpm_result}</span><span> the goal.</span><br>
             <br>'''
     elif vendor == 'CPM':
-        if cpm <= cpmgoal:
-            content = f'''
-            <span>US CPM is {cpm:.2f}, goal is {cpmgoal:.2f},</span><span id="goal1"> meet</span><span> the goal.</span><br>
-            <br>'''
-        else:
-            content = f'''
-            <span>US CPM is {cpm:.2f}, goal is {cpmgoal:.2f},</span><span id="goal2"> don't meet</span><span> the goal.</span><br>
+        cpm_result = "meet" if cpm <= cpmgoal else "don't meet"
+        content = f'''
+            <span>US CPM is {cpm:.2f}, goal is {cpmgoal:.2f},</span><span id="goal1"> {cpm_result}</span><span> the goal.</span><br>
             <br>'''
     elif vendor == 'Rework':
-        if rework <= reworkgoal:
-            content = f'''
-            <span>US rework rate is {rework:.2%}, goal is {reworkgoal:.2%},</span><span id="goal1"> meet</span><span> the goal.</span><br>
-            <br>'''
-        else:
-            content = f'''
-            <span>US rework rate is {rework:.2%}, goal is {reworkgoal:.2%},</span><span id="goal2"> don't meet</span><span> the goal.</span><br>
+        rework_result = "meet" if rework <= reworkgoal else "don't meet"
+        content = f'''
+            <span>US rework rate is {rework:.2%}, goal is {reworkgoal:.2%},</span><span id="goal1"> {rework_result}</span><span> the goal.</span><br>
             <br>'''
     else:
         content = ''
@@ -184,35 +163,34 @@ if __name__=="__main__":
     sender_name = 'Zixin Nie'
     sender_cell = '186-7234-6819'
     send_list= ['Amsino',
-                # 'Cobes',
+                'Cobes',
                 'Com Bridge',
-                # 'Conod',
-                # 'Danameco',
+                'Conod',
+                'Danameco',
                 'Dieu Thuong',
-                # 'E Test',
-                # 'Hong De',
-                # 'Eco Medi Glove',
-                # 'Gcmedica',
-                # 'Transtek',
-                # 'Dunli',
-                # 'Hartalega',
-                # 'Jianerkang',
-                # 'Jumao',
-                # 'Jie Gao',
-                # 'Kossan',
-                # 'Lotus',
-                'Medisafe'
-                # 'Premier Towels',
-                # 'Principle & Will',
-                # 'Raise',
-                # 'Rang Dong',
-                # 'SES',
-                # 'Minhua',
-                # 'Sino',
-                # 'Trolli King',
-                # 'YTY',
-                # 'Assure'
+                'E Test',
+                'Hong De',
+                'Eco Medi Glove',
+                'Gcmedica',
+                'Transtek',
+                'Dunli',
+                'Hartalega',
+                'Jianerkang',
+                'Jumao',
+                'Jie Gao',
+                'Kossan',
+                'Lotus',
+                'Medisafe',
+                'Premier Towels',
+                'Principle & Will',
+                'Raise',
+                'Rang Dong',
+                'SES',
+                'Minhua',
+                'Sino',
+                'Trolli King',
+                'YTY',
+                'Assure'
                 ]
     send_mail(path,filename,year,month,send_list)
-
 
